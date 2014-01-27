@@ -1,9 +1,8 @@
 class LinksController < ApplicationController
 
-
-
 	def show
 		@link = Link.find(params[:id])
+		@comment = Comment.new
 	end
 
 	def new
@@ -11,12 +10,18 @@ class LinksController < ApplicationController
 	end
 
 	def create
-		@link = Link.new(params[:link].permit(:title, :url))
+		@link = Link.new(link_params)
 		if @link.save
 			redirect_to @link
 		else
 			render 'new'
 		end
+	end
+
+	private
+
+	def link_params
+		params.require(:link).permit(:title, :url)
 	end
 
 end
