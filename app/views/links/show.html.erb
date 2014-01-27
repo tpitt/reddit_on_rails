@@ -1,9 +1,11 @@
 <h2>Comments</h2>
 
 <div>
-	<% @link.comments.each do |comment| %>
-		<p><%= comment.message %></p>
-	<% end %>
+	<ul>
+		<% @link.comments.each do |comment| %>
+			<li><%= comment.message %></li>
+		<% end %>
+	</ul>
 </div>
 
 <%= form_for @comment do |f| %>
