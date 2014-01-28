@@ -3,9 +3,9 @@ class VotesController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    @vote = current_user.votes.where(:link_id => params[:vote][:link_id]).first
+    @vote = current_user.votes.where(link_id: params[:vote][:link_id]).first
 		@vote ||= current_user.votes.create(vote_params)
-		@vote.update_attributes(:up => params[:vote][:up])
+		@vote.update_attributes(vote_params)
     redirect_to :back
   end
 

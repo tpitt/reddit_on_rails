@@ -1,23 +1,26 @@
-<h2>I AMA Homepage</h2>
+<h2>RedditOnRails</h2>
 
-<%= link_to "Add a link", new_link_path %>
+
+<%= content_for :sidebar do %>
+  				<%= link_to "Add a link", new_link_path %>
+				<% end %>
 
 <ul>
 	<% @links.each do |link| %>
 		<li><%= link_to link.title, link.url %></li>
 		<%= link_to "comments", link %>
 		<p>
-			<% if current_user && current_user.votes.where(:link_id => link.id, :up => true).present? %>
+			<% if current_user && current_user.votes.where(link_id: link.id, up: true).present? %>
     		*
   		<% else %>
     		<%= link_to "+", votes_path(vote: {link_id: link.id, up: true}), method: :post %>
   		<% end %>
-  		<% if current_user && current_user.votes.where(:link_id => link.id, :up => false).present? %>
+  		<% if current_user && current_user.votes.where(link_id: link.id, up: false).present? %>
     		*
   		<% else %>
     		<%= link_to "-", votes_path(vote: {link_id: link.id, up: false}), method: :post %>
   		<% end %>
-			Votes: <%= link.votes.where(:up => true).count - link.votes.where(:up => false).count %>
+			Votes: <%= link.votes.where(up: true).count - link.votes.where(up: false).count %>
 		</p>
 	<% end %>
 </ul>
