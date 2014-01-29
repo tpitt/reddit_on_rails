@@ -1,13 +1,7 @@
-<h2>RedditOnRails</h2>
-
-
-<%= content_for :sidebar do %>
-  				<%= link_to "Add a link", new_link_path %>
-				<% end %>
 
 <ul>
 	<% @links.each do |link| %>
-		<li><%= link_to link.title, link.url %></li>
+		<li><h3><%= link_to link.title, link.url %> <small>(<%= link_to link.url, link.url %>)</small></h3></li>
 		<%= link_to "comments", link %>
 		<p>
 			<% if current_user && current_user.votes.where(link_id: link.id, up: true).present? %>

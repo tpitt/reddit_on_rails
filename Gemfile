@@ -10,6 +10,11 @@ group :production do
 	gem 'rails_12factor'
 end
 
+group :test do
+	gem 'database_cleaner'
+	gem 'capybara'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
